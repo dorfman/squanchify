@@ -3,6 +3,11 @@ String.prototype.upCase = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
+/* What is pain? */
+var wubalub = function(content) {
+  return content.replace(new RegExp('\\bpain\\b', 'g'), 'pain (Wubalubadubdub!)');
+};
+
 /* Squanch. */
 var squanchify = function(content) {
   // Each dictionary has a different tense.
@@ -23,6 +28,8 @@ var squanchify = function(content) {
   wordings.forEach(replaceWord);
   squanch = 'squanched';
   wordeds.forEach(replaceWord);
+
+  content = wubalub(content); // Little bonus
 
   return content;
 };
