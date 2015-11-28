@@ -1,20 +1,28 @@
+/* Upper cases a word. */
+String.prototype.upCase = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+/* Squanch. */
 var squanchify = function(content) {
+  // Each dictionary has a different tense.
+  var words = ['mess', 'feel', 'count', 'load', 'play', 'watch', 'turn', 'love', 'like', 'fuck', 'use', 'masturbate', 'jack', 'lift', 'hell'];
+  var wordings = ['messing', 'feeling', 'counting', 'loading', 'playing', 'watching', 'turning', 'loving', 'liking', 'fucking', 'using', 'jacking', 'lifting', 'masturbating'];
+  var wordeds = ['messed', 'felt', 'counted', 'loaded', 'played', 'watched', 'turned', 'loved', 'liked', 'fucked', 'used', 'jacked', 'lifted', 'masturbated'];
+  var squanch = 'squanch';
 
-  var words = ['feel', 'count', 'load', 'play', 'watch', 'turn', 'love', 'like', 'fuck', 'use', 'masturbate', 'jack', 'lift', 'hell'];
-  var wordings = ['feeling', 'counting', 'loading', 'playing', 'watching', 'turning', 'loving', 'liking', 'fucking', 'using', 'jacking', 'lifting', 'masturbating'];
-  var wordeds = ['felt', 'counted', 'loaded', 'played', 'watched', 'turned', 'loved', 'liked', 'fucked', 'used', 'jacked', 'lifted', 'masturbated'];
+  // Where the squanching happens.
+  var replaceWord = function(word) {
+    content = content.replace(new RegExp('\\b' + word + '\\b', 'g'), squanch);
+    content = content.replace(new RegExp('\\b' + word.upCase() + '\\b', 'g'), squanch.upCase()); //checks to see if the first letter is capitalize
+  };
 
-  words.forEach(function(word) {
-    content = content.replace(new RegExp('\\b' + word + '\\b', 'g'), 'squanch');
-  });
-
-  wordings.forEach(function(wording) {
-    content = content.replace(new RegExp('\\b' + wording + '\\b', 'g'), 'squanching');
-  });
-
-  wordeds.forEach(function(worded) {
-    content = content.replace(new RegExp('\\b' + worded + '\\b', 'g'), 'squanched');
-  });
+  // Calls the replace word for the three tenses used.
+  words.forEach(replaceWord);
+  squanch = 'squanching';
+  wordings.forEach(replaceWord);
+  squanch = 'squanched';
+  wordeds.forEach(replaceWord);
 
   return content;
 };
