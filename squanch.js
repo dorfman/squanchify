@@ -1,7 +1,7 @@
-/* Upper cases a word. */
+/* Upper cases first letter of word. */
 String.prototype.upCase = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
-}
+};
 
 /* What is pain? */
 var wubalub = function(content) {
@@ -20,6 +20,7 @@ var squanchify = function(content) {
   var replaceWord = function(word) {
     content = content.replace(new RegExp('\\b' + word + '\\b', 'g'), squanch);
     content = content.replace(new RegExp('\\b' + word.upCase() + '\\b', 'g'), squanch.upCase()); //checks to see if the first letter is capitalize
+    content = content.replace(new RegExp('\\b' + word.toUpperCase() + '\\b', 'g'), squanch.toUpperCase()); //checks to see if the word is all caps
   };
 
   // Calls the replace word for the three tenses used.
