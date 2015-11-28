@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Squanchify",
+  "description": "This extension replaces certain words with the word 'squanch'",
+  "version": "1.0",
+
+  "permissions": [],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["jquery.min.js", "myscript.js"]
+    }
+  ]
+}
