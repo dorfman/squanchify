@@ -18,23 +18,23 @@ var squanchify = function(content) {
   var wordeds = ['commented', 'messed', 'felt', 'counted', 'loaded', 'played', 'watched', 'turned', 'loved', 'liked', 'fucked', 'used', 'jacked', 'lifted', 'masturbated'];
 
   // To cycle through different tenses and uses of squanch
-  var dictionary = [{words: moreWords, squanch: 'squanchier'},
+  var dictionaries = [{words: moreWords, squanch: 'squanchier'},
                     {words: wordly, squanch: 'squanchy'},
                     {words: words, squanch: 'squanch'},
                     {words: wordings, squanch: 'squanching'},
                     {words: wordeds, squanch: 'squanched'}];
 
   // Cycles through different squanches and dictionaries
-  for (var i = 0; i < dictionary.length; i++) {
-    var squanch = dictionary[i].squanch;
-    var dict = dictionary[i].words;
+  dictionaries.forEach(function(dictionary) {
+    var squanch = dictionary.squanch;
+    var dict = dictionary.words;
 
     dict.forEach(function(word) {
       content = content.replace(new RegExp('\\b' + word + '\\b', 'g'), squanch);
       content = content.replace(new RegExp('\\b' + word.upCase() + '\\b', 'g'), squanch.upCase()); //checks to see if the first letter is capitalize
       content = content.replace(new RegExp('\\b' + word.toUpperCase() + '\\b', 'g'), squanch.toUpperCase()); //checks to see if the word is all caps
     });
-  };
+  });
 
   content = wubalub(content); // Little bonus
 
