@@ -13,8 +13,8 @@ var squanchify = function(content) {
   // Each dictionary has a different tense.
   var moreWords = ['more awesome', 'messier', 'lovelier', 'better'];
   var wordly = ['lovely', 'beautiful', 'crazy', 'awesome', 'messy'];
-  var words = ['comment', 'mind', 'style', 'bride', 'mess', 'feel', 'count', 'load', 'play', 'watch', 'turn', 'love', 'like', 'fuck', 'use', 'shit', 'masturbate', 'jack', 'lift', 'hell'];
-  var wordings = ['looking', 'messing', 'feeling', 'counting', 'loading', 'playing', 'watching', 'turning', 'loving', 'liking', 'fucking', 'using', 'jacking', 'lifting', 'masturbating'];
+  var words = ['comment', 'mind', 'style', 'bride', 'mess', 'feel', 'count', 'load', 'play', 'watch', 'turn', 'love', 'like', 'fuck', 'use', 'shit', 'hate', 'sex', 'masturbate', 'fap', 'jack', 'lift', 'hell'];
+  var wordings = ['looking', 'messing', 'feeling', 'counting', 'loading', 'playing', 'watching', 'turning', 'loving', 'liking', 'fucking', 'masturbating', 'fapping', 'using', 'jacking', 'lifting', 'hating'];
   var wordeds = ['commented', 'messed', 'felt', 'counted', 'loaded', 'played', 'watched', 'turned', 'loved', 'liked', 'fucked', 'used', 'jacked', 'lifted', 'masturbated'];
 
   // To cycle through different tenses and uses of squanch
@@ -41,4 +41,16 @@ var squanchify = function(content) {
   return content;
 };
 
-document.body.innerHTML = squanchify(document.body.innerHTML);
+/* Only parses through content and avoids modifying HTML tags and CSS class names */
+var traverseHTML = function(nodes) {
+  // nodes is not an array; it's a NodeList, so no forEach loop
+  for (var i = 0; i < nodes.length; i++) {
+    if (nodes[i].nodeValue)
+      nodes[i].nodeValue = squanchify(nodes[i].nodeValue);
+
+    nodes[i].childNodes = traverseHTML(nodes[i].childNodes);
+  }
+  return nodes;
+};
+
+document.body.childNodes = traverseHTML(document.body.childNodes);
